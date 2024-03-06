@@ -87,3 +87,5 @@ void mouse(GLint button, GLint action, GLint x, GLint y)
     glutPostRedisplay();
     
 }
+
+//gcc questao_2.c -o questao_2 -lglut -lGL -lGLU

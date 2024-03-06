@@ -131,3 +131,5 @@ void teclado(GLubyte key, GLint x, GLint y){
   }
 
 }
+
+//gcc questao_1.c -o questao_1 -lglut -lGL -lGLU
