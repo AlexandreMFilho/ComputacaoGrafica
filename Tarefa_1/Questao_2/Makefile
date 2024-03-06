@@ -1,4 +1,4 @@
-NAME=tarefa
+NAME=questao_2
 CC=gcc
 
 CFLAGS := -lglut -lGLU -lGL -lm 
