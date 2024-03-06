@@ -3,6 +3,7 @@
 #include <GL/glut.h>
 
 void desenha();
+void teclado(GLubyte key, GLint x, GLint y);
 void init();
 void casa();
 void janela();
@@ -24,6 +25,7 @@ int main(int argc, char *argv[])
 
     init();
     glutDisplayFunc(desenha);
+    glutKeyboardFunc(teclado);
 
 
     glutMainLoop();
@@ -115,4 +117,21 @@ void janela(int x, int y){
         glVertex2i(x_jal+(comprimento_jal/2),y_jal);
     glEnd();
     
+}
+
+void teclado(GLubyte key, GLint x, GLint y){
+  if((GLint) key == 32){
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+    desenha();
+    glFlush();
+
+  }else{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+    desenha();
+    glFlush();
+
+  }
+
 }
