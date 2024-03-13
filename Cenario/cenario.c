@@ -11,6 +11,9 @@ void catavento();
 void helice();
 void pa();
 void montanha();
+void estrada();
+void ceu();
+void circulo();
 
 void orientacao();
 
@@ -88,13 +91,73 @@ void desenha(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    montanha();
-    // carro();
-    catavento();
+    ceu();
 
+    montanha();
+
+    estrada();
+
+    //Catavento 1
+    glPushMatrix();
+    glTranslated(-8.0,7.0,0.0);
+    glScaled(0.5, 0.5, 1);
+    catavento();
+    glPopMatrix();
+
+    //Catavento 2
+    glPushMatrix();
+    glTranslated(-3.5,5.0,0.0);
+    glScaled(0.3, 0.3, 1);
+    catavento();
+    glPopMatrix();
+
+    //Catavento 3
+    glPushMatrix();
+    glTranslated(1.5,6.5,0.0);
+    glScaled(0.6, 0.6, 1);
+    catavento();
+    glPopMatrix();
+
+
+    carro();
+
+    circulo();
+    
     orientacao();
     glFlush();
 }
+
+void circulo(){
+
+}
+
+void estrada(){
+    glColor3f(0.5,0.5,0.5);
+    glPushMatrix();
+    glTranslated(0.0,-5.0,0.0);
+    glScaled(10, 2, 1);
+    draw("poligono",quadrado,4);
+    glPopMatrix();
+
+    glColor3f(1.0,1.0,1.0);
+    glPushMatrix();
+    glTranslated(0.0,-5.0,0.0);
+    glScaled(10, 0.2, 1);
+    draw("poligono",quadrado,4);
+    glPopMatrix();
+}
+
+void ceu(){
+    glColor3f(0.1,0.6,1.0);
+    glPushMatrix();
+    glTranslated(0.0,5.0,0.0);
+    glScaled(10, 5, 1);
+    draw("poligono",quadrado,4);
+    glPopMatrix();   
+    
+
+}
+
 
 void montanha(){
     glColor3f(0.0,0.6,0.3);
@@ -126,13 +189,13 @@ void catavento(){
 
     glColor3f(0.5,0.5,0.5);
     glPushMatrix();
-    glTranslated(0.0,-3.0,0.0);
-    glScaled(0.2, 4, 1);
+    glTranslated(0.0,-6.0,0.0);
+    glScaled(0.2, 6, 1);
     draw("poligono",quadrado,4);
     glPopMatrix();
 
     glPushMatrix();
-    // glRotatef(10,0,0,1);
+    glRotatef(10,0,0,1);
     helice();
     glPopMatrix();
 }
@@ -179,7 +242,7 @@ void carro(){
 void pa(){
     glPushMatrix();
     glTranslated(1,1,1);
-    glScaled(0.2, 3, 1);
+    glScaled(0.2, 2, 1);
     draw("poligono",triangulo,3);
     glPopMatrix();
     glPushMatrix();
