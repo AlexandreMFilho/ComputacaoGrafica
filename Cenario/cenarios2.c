@@ -11,11 +11,7 @@ void catavento();
 void helice();
 void pa();
 void montanha();
-void estrada();
-void ceu();
-void circulo(char*);
-void sol();
-void roda();
+void doFrame(int);
 
 void orientacao();
 
@@ -53,25 +49,11 @@ int origem[][2]={
     {0,0}
 };
 
-int unitario[][2]={
-    {0,1}
-};
-
-int barra[][2]={
-    {0,0},
-    {0,1}
-};
-
 int cartesiano[][2] = {
     {-100,0},
     {100,0},
     {0,100},
     {0,-100}
-};
-
-int raio[][2] = {
-    {0,1},
-    {0,2}
 };
 
 void orientacao(){
@@ -83,7 +65,7 @@ void orientacao(){
 }
 
 void doFrame(int v){
-
+    
     frameNumber++;
     glutPostRedisplay();
     glutTimerFunc(20,doFrame,0);
@@ -93,10 +75,10 @@ void doFrame(int v){
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_DOUBLE);
     glutInitWindowPosition(400 ,100);
     glutInitWindowSize(WIDTH,HEIGHT);
-    glutCreateWindow("Exercicio - Cenario Animacao");
+    glutCreateWindow("Exercicio - Castelo");
 
     init();
     glutDisplayFunc(desenha);
@@ -119,147 +101,47 @@ void desenha(){
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    ceu();
-
     montanha();
 
-    estrada();
-
-    // // //Catavento 1
-    glPushMatrix();
-    glTranslated(-8.0,7.0,0.0);
-    glScaled(0.5, 0.5, 1);
-    catavento();
-    glPopMatrix();
-
-    // // //Catavento 2
-    glPushMatrix();
-    glTranslated(-3.5,5.0,0.0);
-    glScaled(0.3, 0.3, 1);
-    catavento();
-    glPopMatrix();
-
-    // // //Catavento 3
-    glPushMatrix();
-    glTranslated(1.5,6.5,0.0);
-    glScaled(0.6, 0.6, 1);
-    catavento();
-    glPopMatrix();
-
 
     glPushMatrix();
-    glTranslated(8.0,8.0,0.0);
-    sol();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslated(pos,-5.5,0.0);
-    pos+= 0.1;
+    glTranslated(pos,-3.0,0.0);
+    pos+= 0.2;
     if(pos >= 10)pos = -20.0;
+    glScaled(0.5,0.5,1);
     carro();
     glPopMatrix();
 
+    glPushMatrix();
+    glTranslated(-pos,0.0,0.0);
+
+    glPushMatrix();
+    glTranslated(-5.0,3.0,0.0);
+    glScaled(0.5,0.5,1);
+    catavento();
     glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(2.0,1.5,0.0);
+    glScaled(0.5,0.5,1);
+    catavento();
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslated(3.0,-3.0,0.0);
+    glScaled(1.0,1.0,1);
+    catavento();
+    glPopMatrix();
+    
+    glPopMatrix();
+
+
     orientacao();
     glFlush();
 
     glutSwapBuffers();
-
 }
-
-void sol(){
-
-    glColor3f(1.0,1.0,0.0);
-    circulo("fill");
-    glColor3f(1.0,0.5,0.0);
-    circulo("vertices");
-
-    glPushMatrix();
-        glRotatef(frameNumber,0,0,1);
-        glPushMatrix();
-            for(int i = 0; i < 12; i++){
-                    glRotatef(360/12,0,0,1);
-                    draw("linhas",raio,2);
-                }
-        glPopMatrix();
-    glPopMatrix();
-
-}
-void roda(){
-
-    glPushMatrix();
-        glRotatef(frameNumber,0,0,1);
-
-        glColor3f(0.3,0.3,0.3);
-        circulo("fill");
-        glColor3f(0.0,0.0,0.0);
-        circulo("vertices");
-
-        glPushMatrix();
-        for(int i = 0; i < 12; i++){
-                glRotatef(360/12,0,0,1);
-                draw("linhas",barra,2);
-            }
-        glPopMatrix();
-
-    glPopMatrix();
-
-}
-
-void circulo(char *tipo){
-
-    int resolucao = 2000;
-    float taxa = 360.0/resolucao;
-    
-    if(!strcmp("fill",tipo)){
-    glLineWidth(1);
-    // glColor3f(0.0,0.0,0.0);
-    glPushMatrix();
-
-    for(int i = 0; i < resolucao; i++){
-            glRotatef(taxa,0,0,1);
-            draw("linhas",barra,2);
-        }
-    glPopMatrix();
-    }else{
-        glPointSize(1);
-        // glColor3f(1.0,0.0,0.0);
-        glPushMatrix();
-        for(int i = 0; i < resolucao; i++){
-                glRotatef(taxa,0,0,1);
-                draw("vertices",unitario,1);
-            }
-        glPopMatrix();
-    }
-}
-
-void estrada(){
-    glColor3f(0.5,0.5,0.5);
-    glPushMatrix();
-    glTranslated(0.0,-5.0,0.0);
-    glScaled(10, 2, 1);
-    draw("poligono",quadrado,4);
-    glPopMatrix();
-
-    glColor3f(1.0,1.0,1.0);
-    glPushMatrix();
-    glTranslated(0.0,-5.0,0.0);
-    glScaled(10, 0.2, 1);
-    draw("poligono",quadrado,4);
-    glPopMatrix();
-}
-
-void ceu(){
-    glColor3f(0.1,0.6,1.0);
-    glPushMatrix();
-    glTranslated(0.0,5.0,0.0);
-    glScaled(10, 5, 1);
-    draw("poligono",quadrado,4);
-    glPopMatrix();   
-    
-
-}
-
 
 void montanha(){
     glColor3f(0.0,0.6,0.3);
@@ -285,14 +167,15 @@ void montanha(){
     glPopMatrix();   
     
 
+
 }
 
 void catavento(){
 
     glColor3f(0.5,0.5,0.5);
     glPushMatrix();
-    glTranslated(0.0,-6.0,0.0);
-    glScaled(0.2, 6, 1);
+    glTranslated(0.0,-3.0,0.0);
+    glScaled(0.2, 4, 1);
     draw("poligono",quadrado,4);
     glPopMatrix();
 
@@ -335,23 +218,6 @@ void helice(){
 }
 
 void carro(){
-
-    glPushMatrix();
-        // glRotatef(frameNumber,0,0,1);
-        glPushMatrix();
-            glScaled(0.5,0.5,1.0);
-            glTranslated(2.0,-0.5,0.0);
-            roda();
-            glPopMatrix();
-
-            glPushMatrix();
-            glScaled(0.5,0.5,1.0);
-            glTranslated(8.0,-0.5,0.0);
-            roda();
-        glPopMatrix();
-
-    glPopMatrix();
-
     glPushMatrix();
     glColor3f(1.0,0.0,0.0);
     draw("poligono",chassi,8);
@@ -361,7 +227,7 @@ void carro(){
 void pa(){
     glPushMatrix();
     glTranslated(1,1,1);
-    glScaled(0.2, 2, 1);
+    glScaled(0.2, 3, 1);
     draw("poligono",triangulo,3);
     glPopMatrix();
     glPushMatrix();
@@ -375,7 +241,7 @@ void pa(){
 void draw(char *tipo, int(*figura)[2], int n){
 
     if(!strcmp("vertices",tipo)){
-        glPointSize(5);
+        glPointSize(10);
         // glColor3f(1.0,0.0,0.0);
         glBegin(GL_POINTS);
             for(int i = 0; i < n; i++){
@@ -408,3 +274,21 @@ void draw(char *tipo, int(*figura)[2], int n){
     }
 
 }
+
+
+
+
+/*
+
+    glPushMatrix();
+    glTranslated(-5.0+(float)frameNumber/50,-3.0,0.0);
+//    pos+= frameNumber/100;
+//    if(pos >= 10)pos = -20.0;
+    glScaled(0.5,0.5,1);
+    carro();
+    glPopMatrix();
+
+//    glPushMatrix();
+//    glTranslated(-pos,
+
+*/
