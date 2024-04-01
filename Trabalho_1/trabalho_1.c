@@ -16,6 +16,8 @@ void turbina();
 void arvore_1();
 void arvore_2();
 void arvore_3();
+void nuvem_1();
+void nuvem_2();
 
 
 int main(int argc, char *argv[]){
@@ -24,8 +26,8 @@ int main(int argc, char *argv[]){
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(W_WIDTH,W_HEIGHT);
     glutCreateWindow("Trabalho 1 - Game Side Scrolling");
-    //glClearColor(0.5,0.0,0.8,1.0);
-    glClearColor(1.0,1.0,1.0,1.0);
+    glClearColor(0.5,0.0,0.8,1.0);
+    //glClearColor(1.0,1.0,1.0,1.0);
     gluOrtho2D(-20,20,-20,20);
 
     glutDisplayFunc(desenha);
@@ -45,6 +47,8 @@ void desenha(){
     //arvore_1();
     //arvore_2();
     //arvore_3();
+    //nuvem_1();
+    nuvem_2();
     glPopMatrix();
 
 
@@ -80,6 +84,61 @@ void circulo(){
         glVertex2f(-1,-1);
     glEnd();
     }
+}
+
+void nuvem_1(){
+    glColor3f(0.9,0.9,0.9);
+    
+    glPushMatrix();
+        circulo();
+    glPopMatrix();
+    
+    glPushMatrix();
+        glTranslated(-1.6,-0.3,0.0);
+        glScaled(0.7,0.7,0.0);
+        circulo();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(1.6,-0.3,0.0);
+        glScaled(0.7,0.7,0.0);
+        circulo();
+    glPopMatrix();
+}
+
+void nuvem_2(){
+    glColor3f(0.9,0.9,0.9);
+    
+    glPushMatrix();
+        glScaled(2.0,2.0,0.0);
+        circulo();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(-2.9,-1.0,0.0);
+        glScaled(1.3,1.3,0.0);
+        circulo();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(-4.8,-1.4,0.0);
+        glScaled(1.0,1.0,0.0);
+        circulo();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(3.2,-1.0,0.0);
+        glScaled(1.3,1.3,0.0);
+        circulo();
+    glPopMatrix();
+
+
+    glPushMatrix();
+        glTranslated(-0.4,-1.8,0.0);
+        glScaled(4.0,1.0,0.0);
+        quadrado();
+    glPopMatrix();
+
 }
 
 void arvore_1(){
