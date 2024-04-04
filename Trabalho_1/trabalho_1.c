@@ -4,8 +4,8 @@
 #include<math.h>
 #include<GL/glut.h>
 
-#define W_WIDTH 500
-#define W_HEIGHT 500
+#define W_WIDTH 1500
+#define W_HEIGHT 300
 
 void desenha();
 void triangulo();
@@ -22,7 +22,10 @@ void nuvem_3();
 void montanha();
 void casa();
 void telhado();
+void cenario();
+void dot();
 
+int dot_ = 0;
 
 int main(int argc, char *argv[]){
 
@@ -30,9 +33,9 @@ int main(int argc, char *argv[]){
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(W_WIDTH,W_HEIGHT);
     glutCreateWindow("Trabalho 1 - Game Side Scrolling");
-    //glClearColor(0.5,0.0,0.8,1.0);
-    glClearColor(1.0,1.0,1.0,1.0);
-    gluOrtho2D(-20,20,-20,20);
+    glClearColor(0.5,0.0,0.8,1.0);
+    // glClearColor(1.0,1.0,1.0,1.0);
+    gluOrtho2D(-100,100,-20,20);
 
     glutDisplayFunc(desenha);
 
@@ -45,19 +48,9 @@ void desenha(){
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
-    
     glPushMatrix();
-    //turbina();
-    //arvore_1();
-    //arvore_2();
-    //arvore_3();
-    //nuvem_1();
-    //nuvem_2();
-    //nuvem_3();
-    //montanha();
-    casa();
+    cenario();
     glPopMatrix();
-
 
     glFlush();
     glutSwapBuffers();
@@ -85,96 +78,293 @@ void circulo(){
     for(int i=0;i<360;i++){
     glRotated(i,0,0,1);
     glBegin(GL_POLYGON);
-        glVertex2f(-1.0,0.0);
-        glVertex2f(1.0,0.0);
-        glVertex2f(0.0,1.0);
+        glVertex2f(-1,1);
+        glVertex2f(1,1);
+        glVertex2f(1,-1);
+        glVertex2f(-1,-1);
     glEnd();
     }
 }
 
-void casa(){
-
-    glPushMatrix();
-    
-        glTranslated(-8.5,-1.0,0.0);
-        glColor3f(0.8,0.0,0.0);
+void dot(){
+    if(dot_){
         glPushMatrix();
-            glTranslated(0.0,3.0,0.0);
-            glScaled(3.0,2.0,0.0);
-            quadrado();
+            glColor3f(0.0,0.0,0.0);
+            glScaled(0.3,0.3,0.0);
+            circulo();
         glPopMatrix();
-
-        glPushMatrix();
-            glTranslated(-3.0,2.0,0.0);
-            glScaled(1.0,3.0,0.0);
-            triangulo();
-        glPopMatrix();
-
-        glColor3f(0.5,0.2,0.5);
-        glPushMatrix();
-            glScaled(3.0,2.0,0.0);
-            quadrado();
-        glPopMatrix();
-
-        glColor3f(0.0,0.0,0.8);
-        glPushMatrix();
-            glTranslated(0.0,-1.0,0.0);
-            glScaled(2.0,1.0,0.0);
-            quadrado();
-        glPopMatrix();
-
-    glPopMatrix();
-
-    glPushMatrix();
-    glColor3f(0.1,0.8,0.5);
-        glTranslated(0.0,0.0,0.0);
-        glScaled(5.5,3.0,0.0);
-        quadrado();
-    glPopMatrix();
-
-    glPushMatrix();
-        glColor3f(0.5,0.5,0.5);
-        glTranslated(1.0,-1.0,0.0);
-        glScaled(1.0,2.0,0.0);
-        quadrado();
-    glPopMatrix();
-
-    glPushMatrix();
-        glColor3f(0.5,0.0,0.5);
-        glTranslated(4.0,0.0,0.0);
-        glScaled(1.0,1.0,0.0);
-        quadrado();
-    glPopMatrix();
-
-    glPushMatrix();
-        glColor3f(0.5,0.0,0.5);
-        glTranslated(-1.5,0.0,0.0);
-        glScaled(1.0,1.0,0.0);
-        quadrado();
-        glTranslated(-2.5,0.0,0.0);
-        glScaled(1.0,1.0,0.0);
-        quadrado();
-    glPopMatrix();
-
-    glPushMatrix();
-        glColor3f(0.8,0.0,0.0);
-        glTranslated(0.0,3.0,0.0);
-        glScaled(3.0,2.0,0.0);
-        telhado();
-    glPopMatrix();
-
-    glPopMatrix();
+    }
 }
 
-void telhado(){
-    glColor3f(0.8,0.0,0.0);
+void cenario(){
+
+    //chao
     glPushMatrix();
-        glBegin(GL_POLYGON);
-            glVertex2f(-2.0,0.0);
-            glVertex2f(-2.0,2.0);
-            glVertex2f(2.0,1.0);
-            glVertex2f(2.0,0.0);
-        glEnd();
+    glColor3f(0.0,0.8,0.0);
+        glTranslated(-50.0,-20.0,0.0);
+        glScaled(300.0,5.0,0.0);
+        quadrado();
+    glPopMatrix();
+
+    //Montanha
+    glPushMatrix();
+        glTranslated(-50.0,0.0,0.0);
+        glPushMatrix();
+            glTranslated(20.0,-15.0,0.0);
+            glScaled(2.0,2.0,0.0);
+            montanha();
+
+            glTranslated(-30.0,0.0,0.0);
+            glScaled(0.8,0.8,0.0);
+            montanha();
+
+            glTranslated(15.0,0.0,0.0);
+            glScaled(0.8,0.8,0.0);
+            montanha();
+        glPopMatrix();
+
+        glTranslated(100.0,0.0,0.0);
+        glPushMatrix();
+            glTranslated(20.0,-15.0,0.0);
+            glScaled(2.0,2.0,0.0);
+            montanha();
+
+            glTranslated(-30.0,0.0,0.0);
+            glScaled(0.8,0.8,0.0);
+            montanha();
+
+            glTranslated(15.0,0.0,0.0);
+            glScaled(0.8,0.8,0.0);
+            montanha();
+        glPopMatrix();
+    glPopMatrix();
+
+    //Morro
+    glPushMatrix();
+        glColor3f(0.0,0.8,0.0);
+        glTranslated(-65.0,-20.0,0.0);
+        glScaled(15.0,6.0,0.0);
+        circulo();
+    glPopMatrix();
+    glPushMatrix();
+        glColor3f(0.0,0.8,0.0);
+        glTranslated(0.0,-15.0,0.0);
+        glScaled(15.0,6.0,0.0);
+        circulo();
+    glPopMatrix();
+
+    glPushMatrix();
+        glColor3f(0.0,0.8,0.0);
+        glTranslated(65.0,-20.0,0.0);
+        glScaled(15.0,6.0,0.0);
+        circulo();
+    glPopMatrix();
+
+    //Arvores
+    glPushMatrix();
+        glTranslated(-80.0,-15.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(5.0,3.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(8.0,-1.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(4.0,2.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+    glPopMatrix();
+
+        glPushMatrix();
+        glTranslated(-10.0,-10.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(5.0,3.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(8.0,-1.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(4.0,2.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+    glPopMatrix();
+
+
+
+    //Nuvens
+    glPushMatrix();
+        glTranslated(0.0,0.0,0.0);//frame
+        glPushMatrix();
+            glTranslated(-35.0,15.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            nuvem_1();
+
+            glTranslated(15.0,-3.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            nuvem_2();
+
+            glTranslated(20.0,-2.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            nuvem_3();
+        glPopMatrix();
+        
+        glPushMatrix();
+            glTranslated(35.0,15.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            nuvem_1();
+
+            glTranslated(15.0,-3.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            nuvem_2();
+
+            glTranslated(20.0,-2.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            nuvem_3();
+        glPopMatrix();
+
+
+
+            glPushMatrix();
+            glTranslated(-50.0,18.0,0.0);
+            glScaled(-1.0,1.0,0.0);
+            nuvem_1();
+
+            glTranslated(15.0,-3.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            nuvem_2();
+
+            glTranslated(20.0,-2.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            nuvem_3();
+        glPopMatrix();
+    glPopMatrix();
+
+    //Casas
+    glPushMatrix();
+        glTranslated(20.0,-15.0,0.0);
+        glScaled(0.5,0.5,0.0);
+        casa();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(-30.0,-15.0,0.0);
+        glScaled(0.5,0.5,0.0);
+        casa();
+    glPopMatrix();
+
+    //Cataventos
+    glPushMatrix();
+        glTranslated(-60.0,-15.0,0.0);
+        glScaled(1.5,1.5,0.0);
+        turbina();
+
+        glTranslated(35.0,0.0,0.0);
+        glScaled(1.3,1.3,0.0);
+        turbina();
+
+        glTranslated(40.0,0.0,0.0);
+        glScaled(0.9,0.9,0.0);
+        turbina();
+
+    
+}
+
+void casa(){
+    glPushMatrix();
+
+        glTranslated(3.0,3.0,0.0);
+        glPushMatrix();
+
+            glTranslated(-8.5,-1.0,0.0);
+            glColor3f(0.8,0.0,0.0);
+            glPushMatrix();
+                glTranslated(0.0,3.0,0.0);
+                glScaled(3.0,2.0,0.0);
+                quadrado();
+            glPopMatrix();
+
+            glPushMatrix();
+                glTranslated(-3.0,2.0,0.0);
+                glScaled(1.0,3.0,0.0);
+                triangulo();
+            glPopMatrix();
+
+            glColor3f(0.5,0.2,0.5);
+            glPushMatrix();
+                glScaled(3.0,2.0,0.0);
+                quadrado();
+            glPopMatrix();
+
+            glColor3f(0.0,0.0,0.8);
+            glPushMatrix();
+                glTranslated(0.0,-1.0,0.0);
+                glScaled(2.0,1.0,0.0);
+                quadrado();
+            glPopMatrix();
+
+        glPopMatrix();
+
+        glPushMatrix();
+        glColor3f(0.1,0.8,0.5);
+            glTranslated(0.0,0.0,0.0);
+            glScaled(5.5,3.0,0.0);
+            quadrado();
+        glPopMatrix();
+
+        glPushMatrix();
+            glColor3f(0.5,0.5,0.5);
+            glTranslated(1.0,-1.0,0.0);
+            glScaled(1.0,2.0,0.0);
+            quadrado();
+        glPopMatrix();
+
+        glPushMatrix();
+            glColor3f(0.5,0.0,0.5);
+            glTranslated(4.0,0.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            quadrado();
+        glPopMatrix();
+
+        glPushMatrix();
+            glColor3f(0.5,0.0,0.5);
+            glTranslated(-1.5,0.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            quadrado();
+            glTranslated(-2.5,0.0,0.0);
+            glScaled(1.0,1.0,0.0);
+            quadrado();
+        glPopMatrix();
+
+        glPushMatrix();
+            glColor3f(0.8,0.0,0.0);
+            glTranslated(0.0,3.0,0.0);
+            glScaled(3.0,2.0,0.0);
+            telhado();
+        glPopMatrix();
+
+    dot();
+
+    glPopMatrix();
+    }
+
+    void telhado(){
+        glColor3f(0.8,0.0,0.0);
+        glPushMatrix();
+            glBegin(GL_POLYGON);
+                glVertex2f(-2.0,0.0);
+                glVertex2f(-2.0,2.0);
+                glVertex2f(2.0,1.0);
+                glVertex2f(2.0,0.0);
+            glEnd();
+            glPopMatrix();
     glPopMatrix();
 }
 
@@ -207,6 +397,8 @@ void montanha(){
         quadrado();
     glPopMatrix();
 
+    dot();
+
 
 
 
@@ -230,6 +422,8 @@ void nuvem_1(){
         glScaled(0.7,0.7,0.0);
         circulo();
     glPopMatrix();
+
+    dot();
 }
 
 void nuvem_2(){
@@ -264,6 +458,8 @@ void nuvem_2(){
         glScaled(4.0,1.0,0.0);
         quadrado();
     glPopMatrix();
+
+    dot();
 
 }
 
@@ -367,6 +563,9 @@ glPushMatrix();
             circulo();
         glPopMatrix();
     glPopMatrix();
+
+
+    dot();
     
 }
 
@@ -377,11 +576,13 @@ void arvore_1(){
         quadrado();
     glPopMatrix();
 
-    glColor3f(0.0,0.8,0.0);
+    glColor3f(0.4,0.8,0.0);
     glPushMatrix();
         glScaled(1.0,3.0,0.0);
         triangulo();
     glPopMatrix();
+
+    dot();
 }
 
 void arvore_2(){
@@ -398,6 +599,8 @@ void arvore_2(){
         glScaled(0.2,1.5,0.0);
         quadrado();
     glPopMatrix();
+
+    dot();
 
 }
 
@@ -417,6 +620,7 @@ void arvore_3(){
         glScaled(0.2,1.5,0.0);
         quadrado();
     glPopMatrix();
+    dot();
 
 }
 
@@ -454,4 +658,6 @@ void turbina(){
             triangulo();
         glPopMatrix();
     glPopMatrix();
+
+    dot();
 }
