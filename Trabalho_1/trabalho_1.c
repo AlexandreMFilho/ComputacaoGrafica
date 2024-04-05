@@ -4,14 +4,20 @@
 #include<math.h>
 #include<GL/glut.h>
 
-#define W_WIDTH 1500
-#define W_HEIGHT 300
+#define W_WIDTH 500
+#define W_HEIGHT 500
+
+int movx = 0;
+int movy = 0;
 
 void desenha();
 void triangulo();
 void quadrado();
 void circulo();
+
 void doFrame();
+void teclado(GLubyte key, GLint x, GLint y);
+
 
 void turbina();
 void arvore_1();
@@ -53,17 +59,38 @@ void doFrame(int v){
     glutTimerFunc(20,doFrame,0);
 }
 
+void teclado(GLubyte key, GLint x, GLint y){
+    printf("%d\n",key);
+  if((GLint) key == 97){ //a
+    movx+=1;
+  }
+  else if((GLint) key == 100){//d
+    movx-=1;
+  }
+  else if((GLint) key == 115){//s
+    movy-=1;
+  }
+  else if((GLint) key == 119){//w
+    movy+=1;
+  }
+
+
+}
+
 int main(int argc, char *argv[]){
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(W_WIDTH,W_HEIGHT);
+    glutInitWindowPosition(400 ,100);
     glutCreateWindow("Trabalho 1 - Game Side Scrolling");
     //glClearColor(0.5,0.0,0.8,1.0);
     glClearColor(1.0,1.0,1.0,1.0);
-    gluOrtho2D(-100,100,-20,20);
+    gluOrtho2D(-20+movx,20+movx,-20+movy,20+movy);
 
     glutDisplayFunc(desenha);
+    glutKeyboardFunc(teclado);
+
     glutTimerFunc(20,doFrame,0);
 
     glutMainLoop();
@@ -76,6 +103,7 @@ void desenha(){
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
+    //gluLookAt(0.0,0.0,60.0,0.0,0.0,0.0,0.0,0.0,0.0);
     ceu();
     glPushMatrix();
     cenario();
