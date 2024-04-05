@@ -11,6 +11,7 @@ void desenha();
 void triangulo();
 void quadrado();
 void circulo();
+void doFrame();
 
 void turbina();
 void arvore_1();
@@ -24,8 +25,33 @@ void casa();
 void telhado();
 void cenario();
 void dot();
+void ceu();
 
 int dot_ = 0;
+int frameNumber = 0;
+float Cor_ceu = 0.0;
+
+void ceu(){
+    if((frameNumber/200)%2){
+        if(Cor_ceu<=0.0){
+            Cor_ceu=0.0;
+        }
+        Cor_ceu-=0.01;
+    }else{
+        if(Cor_ceu>=1.0){
+            Cor_ceu=1.0;
+        }
+        Cor_ceu+=0.01;
+    }
+    glClearColor(Cor_ceu/2,Cor_ceu/3,Cor_ceu, Cor_ceu/2);
+}
+
+
+void doFrame(int v){
+    frameNumber++;
+    glutPostRedisplay();
+    glutTimerFunc(20,doFrame,0);
+}
 
 int main(int argc, char *argv[]){
 
@@ -33,13 +59,15 @@ int main(int argc, char *argv[]){
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(W_WIDTH,W_HEIGHT);
     glutCreateWindow("Trabalho 1 - Game Side Scrolling");
-    glClearColor(0.5,0.0,0.8,1.0);
-    // glClearColor(1.0,1.0,1.0,1.0);
+    //glClearColor(0.5,0.0,0.8,1.0);
+    glClearColor(1.0,1.0,1.0,1.0);
     gluOrtho2D(-100,100,-20,20);
 
     glutDisplayFunc(desenha);
+    glutTimerFunc(20,doFrame,0);
 
     glutMainLoop();
+
 
     return 0;
 }
@@ -48,6 +76,7 @@ void desenha(){
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
+    ceu();
     glPushMatrix();
     cenario();
     glPopMatrix();
@@ -98,13 +127,6 @@ void dot(){
 
 void cenario(){
 
-    //chao
-    glPushMatrix();
-    glColor3f(0.0,0.8,0.0);
-        glTranslated(-50.0,-20.0,0.0);
-        glScaled(300.0,5.0,0.0);
-        quadrado();
-    glPopMatrix();
 
     //Montanha
     glPushMatrix();
@@ -141,25 +163,33 @@ void cenario(){
 
     //Morro
     glPushMatrix();
-        glColor3f(0.0,0.8,0.0);
+        glColor3f(0.0,0.6,0.0);
         glTranslated(-65.0,-20.0,0.0);
         glScaled(15.0,6.0,0.0);
         circulo();
     glPopMatrix();
     glPushMatrix();
-        glColor3f(0.0,0.8,0.0);
+        // glColor3f(0.0,0.8,0.0);
         glTranslated(0.0,-15.0,0.0);
         glScaled(15.0,6.0,0.0);
         circulo();
     glPopMatrix();
 
     glPushMatrix();
-        glColor3f(0.0,0.8,0.0);
+        // glColor3f(0.0,0.8,0.0);
         glTranslated(65.0,-20.0,0.0);
         glScaled(15.0,6.0,0.0);
         circulo();
     glPopMatrix();
 
+    //chao
+    glPushMatrix();
+    glColor3f(0.0,0.8,0.0);
+        glTranslated(-50.0,-20.0,0.0);
+        glScaled(300.0,5.0,0.0);
+        quadrado();
+    glPopMatrix();
+//----------------------------------------------------------------
     //Arvores
     glPushMatrix();
         glTranslated(-80.0,-15.0,0.0);
@@ -179,7 +209,20 @@ void cenario(){
         arvore_1();
     glPopMatrix();
 
-        glPushMatrix();
+
+    glPushMatrix();
+        glTranslated(-40.0,-18.0,0.0);
+        glScaled(-1.0,1.0,0.0);
+        arvore_3();
+
+
+        glTranslated(4.0,2.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_3();
+    glPopMatrix();
+
+
+    glPushMatrix();
         glTranslated(-10.0,-10.0,0.0);
         glScaled(1.0,1.0,0.0);
         arvore_1();
@@ -197,11 +240,77 @@ void cenario(){
         arvore_1();
     glPopMatrix();
 
+        glPushMatrix();
+        glTranslated(3.0,-15.0,0.0);
+        glScaled(-1.0,1.0,0.0);
+        arvore_2();
+
+        glTranslated(5.0,3.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_2();
+
+        glTranslated(8.0,-1.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_2();
+
+        glTranslated(4.0,2.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_2();
+
+    glPopMatrix();
+
+        glPushMatrix();
+        glTranslated(35.0,-18.0,0.0);
+        glScaled(-1.0,1.0,0.0);
+        arvore_3();
 
 
+        glTranslated(4.0,2.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_3();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(50.0,-15.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(5.0,3.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(8.0,-1.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+
+        glTranslated(4.0,2.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_1();
+    glPopMatrix();
+
+        glPushMatrix();
+        glTranslated(74.0,-15.0,0.0);
+        glScaled(-1.0,1.0,0.0);
+        arvore_2();
+
+        glTranslated(5.0,3.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_2();
+
+        glTranslated(8.0,-1.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_2();
+
+        glTranslated(4.0,2.0,0.0);
+        glScaled(1.0,1.0,0.0);
+        arvore_2();
+
+    glPopMatrix();
+
+//---------------------------------------------------------------
     //Nuvens
     glPushMatrix();
-        glTranslated(0.0,0.0,0.0);//frame
+        glTranslated(-200+((frameNumber%400)),0.0,0.0);//frame
         glPushMatrix();
             glTranslated(-35.0,15.0,0.0);
             glScaled(1.0,1.0,0.0);
@@ -257,6 +366,18 @@ void cenario(){
     glPushMatrix();
         glTranslated(-30.0,-15.0,0.0);
         glScaled(0.5,0.5,0.0);
+        casa();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(-56.0,-14.0,0.0);
+        glScaled(0.3,0.3,0.0);
+        casa();
+    glPopMatrix();
+
+    glPushMatrix();
+        glTranslated(70.0,-13.0,0.0);
+        glScaled(0.3,0.3,0.0);
         casa();
     glPopMatrix();
 
@@ -517,7 +638,7 @@ void nuvem_3(){
         glPopMatrix();
     glPopMatrix();
 
-glPushMatrix();
+    glPushMatrix();
         glScaled(-1.0,1.0,0.0);
         glColor3f(0.9,0.9,0.9);
 
@@ -586,7 +707,7 @@ void arvore_1(){
 }
 
 void arvore_2(){
-    glColor3f(0.0,0.8,0.0);
+    glColor3f(0.0,0.7,0.0);
     glPushMatrix();
         glTranslated(0.0,3.8,0.0);
         circulo();
@@ -605,7 +726,7 @@ void arvore_2(){
 }
 
 void arvore_3(){
-    glColor3f(0.0,0.8,0.0);
+    glColor3f(0.0,0.4,0.0);
     glPushMatrix();
         glTranslated(-1.0,2.0,0.0);
         circulo();
@@ -635,7 +756,7 @@ void turbina(){
     glColor3f(0.2,0.0,0.5);
     glPushMatrix();
         glTranslated(0.0,8.0,0.0);
-        glRotated(10,0,0,1);//FrameNUMBER
+        glRotated(frameNumber,0,0,1);//FrameNUMBER
         glPushMatrix();
             glScaled(0.3,0.3,0.0);
             circulo();
