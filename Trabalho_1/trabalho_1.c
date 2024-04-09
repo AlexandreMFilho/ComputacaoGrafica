@@ -3,12 +3,13 @@
 #include<string.h>
 #include<math.h>
 #include<GL/glut.h>
+#include<stdbool.h>
 
 #define W_WIDTH 500
 #define W_HEIGHT 500
 
-int movx = 0;
-int movy = 0;
+int xmin = -20,xmax = 20;
+bool esquerda = 0, direita = 0;
 
 void desenha();
 void triangulo();
@@ -32,6 +33,7 @@ void telhado();
 void cenario();
 void dot();
 void ceu();
+
 
 int dot_ = 0;
 int frameNumber = 0;
@@ -59,21 +61,28 @@ void doFrame(int v){
     glutTimerFunc(20,doFrame,0);
 }
 
+
+
 void teclado(GLubyte key, GLint x, GLint y){
     printf("%d\n",key);
   if((GLint) key == 97){ //a
-    movx+=1;
+    esquerda =true;
   }
   else if((GLint) key == 100){//d
-    movx-=1;
+    direita = false;
   }
-  else if((GLint) key == 115){//s
-    movy-=1;
-  }
-  else if((GLint) key == 119){//w
-    movy+=1;
-  }
-
+//   else if((GLint) key == 115){//s
+//     ;
+//   }
+//   else if((GLint) key == 119){//w
+//     movy++;
+//   }
+    else{
+        esquerda = false;
+        direita = false;
+    }
+    // init();
+    
 
 }
 
@@ -84,9 +93,10 @@ int main(int argc, char *argv[]){
     glutInitWindowSize(W_WIDTH,W_HEIGHT);
     glutInitWindowPosition(400 ,100);
     glutCreateWindow("Trabalho 1 - Game Side Scrolling");
-    //glClearColor(0.5,0.0,0.8,1.0);
     glClearColor(1.0,1.0,1.0,1.0);
-    gluOrtho2D(-20+movx,20+movx,-20+movy,20+movy);
+    glOrtho(xmin+frameNUMBER/100,xmax+frameNUMBER/100,-20,20,1.0,-1.0);
+    // gluLookAt(0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0);
+    //glClearColor(0.5,0.0,0.8,1.0);
 
     glutDisplayFunc(desenha);
     glutKeyboardFunc(teclado);
@@ -102,8 +112,17 @@ int main(int argc, char *argv[]){
 void desenha(){
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
+    
+    if(esquerda){
+        xmax--;
+        xmin--;
+    }
+    if(direita){
+        xmax++;
+        xmin++;
+    }
+        glutPostRedisplay();
 
-    //gluLookAt(0.0,0.0,60.0,0.0,0.0,0.0,0.0,0.0,0.0);
     ceu();
     glPushMatrix();
     cenario();
