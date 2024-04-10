@@ -94,7 +94,7 @@ int main(int argc, char *argv[]){
     glutInitWindowPosition(400 ,100);
     glutCreateWindow("Trabalho 1 - Game Side Scrolling");
     glClearColor(1.0,1.0,1.0,1.0);
-    glOrtho(xmin+frameNUMBER/100,xmax+frameNUMBER/100,-20,20,1.0,-1.0);
+    glOrtho(xmin+frameNumber/100,xmax+frameNumber/100,-20,20,1.0,-1.0);
     // gluLookAt(0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0);
     //glClearColor(0.5,0.0,0.8,1.0);
 
