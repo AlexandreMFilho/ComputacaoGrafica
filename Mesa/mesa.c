@@ -5,15 +5,19 @@ void display() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
-
+  gluLookAt(1,1,1,0,0,0,0,1,0);
 
   glEnable(GL_LIGHT0);
   glEnable(GL_LIGHT1);
 
+  //glRotated(30, 1.0, 1.0, 0.0);
 
-  glRotated(30, 1.0, 1.0, 0.0);
+  //Esfera
+  glPushMatrix();
+  glTranslatef(0.0, 1.5, 0.0);
+  glutWireSphere(1.0, 30, 30);
+  glPopMatrix();
+
   //Tabua
   glPushMatrix();
   //glTranslatef(1, 0.0, -3.0);
@@ -63,12 +67,12 @@ void display() {
 
 
 
+
+
 void init() {
 
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
+  glOrtho(-10.0, 10.0, -10.0, 10.0 , 10.0 , -10.0);
 
-  glOrtho(-10.0, 10.0, -10.0, 10.0, 10.0, -10.0);
 
 
   GLfloat black[] = { 0.0, 0.0, 0.0, 1.0 };
@@ -108,7 +112,6 @@ void init() {
 int main(int argc, char** argv) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-  glClearColor(1.0, 1.0, 1.0, 1.0);
   glutInitWindowPosition(100, 100);
   glutInitWindowSize(600, 600);
   glutCreateWindow("Mesa");
