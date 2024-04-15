@@ -20,54 +20,64 @@ void display(void){
 
     glRotatef ((GLfloat) shoulder, 0.0, 0.0, 1.0);
     glRotatef ((GLfloat) shouldery, 0.0, 1.0, 0.0);
-    glRotatef ((GLfloat) shoulderx, 1.0, 0.0, 0.0);
+    // glRotatef ((GLfloat) shoulderx, 1.0, 0.0, 0.0);
 
-
+  glColor3f(1.0,0.0,0.0);
+  //Braco
     glPushMatrix();
       glScalef (2.0, 0.4, 1.0);
-      glutWireCube (1.0);
+      glutSolidCube (1.0);
     glPopMatrix();
 
     glTranslatef (1.0, 0.0, 0.0);
     glRotatef ((GLfloat) elbow, 0.0, 0.0, 1.0);
 
+    //Antebraco
+    glColor3f(0.0,1.0,0.0);
     glPushMatrix();
       glTranslatef (1.0, 0.0, 0.0);
       glScalef (2.0, 0.4, 1.0);
-      glutWireCube (1.0);
+      glutSolidCube (1.0);
     glPopMatrix();
 
+    glColor3f(0.0,0.0,1.0);
     glTranslatef (2.0, 0.2, 0.0);
     glPushMatrix();
+      //Polegar
+      glColor3f(1.0,1.0,0.0);
       glRotated((GLfloat) rd1,0.0,0.0,1.0);
       
       glPushMatrix();
         glTranslatef(0.25, 0.0, 0.0);
         glScaled(0.5,0.2,0.2);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
       glPopMatrix();
     glPopMatrix();
 
     glTranslatef (0.0, -0.4, 0.2);
     glPushMatrix();
+    glColor3f(1.0,0.0,1.0);
+      //Indicador 
       glRotated((GLfloat) rd2,0.0,0.0,1.0);
       
       glPushMatrix();
         glTranslatef(0.25, 0.0, 0.0);
         glScaled(0.5,0.2,0.2);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
       glPopMatrix();
     glPopMatrix();
 
 
     glTranslatef (0.0, 0.0, -0.4);
     glPushMatrix();
+    glColor3f(0.0,1.0,1.0);
+      //Medio 
       glRotated((GLfloat) rd3,0.0,0.0,1.0);
       
       glPushMatrix();
         glTranslatef(0.25, 0.0, 0.0);
         glScaled(0.5,0.2,0.2);
-        glutWireCube(1.0);
+        glutSolidCube(1.0);
       glPopMatrix();
     glPopMatrix();
 
@@ -96,12 +106,12 @@ void keyboard (unsigned char key, int x, int y){
     shoulder = (shoulder - 5) % 360;
     glutPostRedisplay();
     break;
-  case 'a':
-    shouldery = (shoulder + 5) % 360;
+  case 'b':
+    shouldery = (shouldery + 10) % 360;
     glutPostRedisplay();
     break;
-  case 'd':
-    shouldery = (shoulder - 5) % 360;
+  case 'B':
+    shouldery = (shouldery - 10) % 360;
     glutPostRedisplay();
     break;
   case 'e':
@@ -158,3 +168,4 @@ int main(int argc, char** argv){
   return 0;
 }
 
+//gcc -o braco braco.c -lglut -lGLU -lGL -lm
