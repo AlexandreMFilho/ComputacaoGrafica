@@ -7,7 +7,7 @@ void mesa(){
   glPushMatrix();
   //glTranslatef(1, 0.0, -3.0);
   glScaled(15.0, 1.0, 10.0);
-  glutSolidCube(1.0);
+  glutWireCube(1.0);
   glPopMatrix();
 
   //Pernas
@@ -15,28 +15,28 @@ void mesa(){
   glTranslatef(5.0, -3.5, -3.0);
   glRotated(30, 0.0, 1.0, 0.0);
   glScaled(1.0, 6.0, 1.0);
-  glutSolidCube(1.0);
+  glutWireCube(1.0);
   glPopMatrix();
 
   glPushMatrix(); 
   glTranslatef(5.0, -3.5, +3.0);
   glRotated(30, 0.0, 1.0, 0.0);
   glScaled(1.0, 6.0, 1.0);
-  glutSolidCube(1.0);
+  glutWireCube(1.0);
   glPopMatrix();
 
   glPushMatrix();
   glTranslatef(-5.0, -3.5, -3.0);
   glRotated(30, 0.0, 1.0, 0.0);
   glScaled(1.0, 6.0, 1.0);
-  glutSolidCube(1.0);
+  glutWireCube(1.0);
   glPopMatrix();
 
   glPushMatrix();
   glTranslatef(-5.0, -3.5, +3.0);
   glRotated(30, 0.0, 1.0, 0.0);
   glScaled(1.0, 6.0, 1.0);
-  glutSolidCube(1.0);
+  glutWireCube(1.0);
   glPopMatrix();
 
 }
@@ -47,37 +47,37 @@ void cadeira(){
   glPushMatrix();
   //glTranslatef(1, 0.0, -3.0);
   glScaled(4.0, 0.5, 4.0);
-  glutSolidCube(1.0);
+  glutWireCube(1.0);
   glPopMatrix();
 
   //Pernas
   glPushMatrix();
-  glTranslatef(5.0, -3.5, -3.0);
-  glRotated(30, 0.0, 1.0, 0.0);
-  glScaled(1.0, 4.0, 1.0);
-  glutSolidCube(1.0);
+  glTranslatef(0.0, -2.0, 0.0);
+//   glRotated(30, 0.0, 1.0, 0.0);
+  glScaled(0.5, 4.0, 0.5);
+  glutWireCube(1.0);
   glPopMatrix();
 
-  glPushMatrix(); 
-  glTranslatef(5.0, -3.5, +3.0);
-  glRotated(30, 0.0, 1.0, 0.0);
-  glScaled(1.0, 6.0, 1.0);
-  glutSolidCube(1.0);
-  glPopMatrix();
+//   glPushMatrix(); 
+//   glTranslatef(5.0, -3.5, +3.0);
+//   glRotated(30, 0.0, 1.0, 0.0);
+//   glScaled(1.0, 6.0, 1.0);
+//   glutWireCube(1.0);
+//   glPopMatrix();
 
-  glPushMatrix();
-  glTranslatef(-5.0, -3.5, -3.0);
-  glRotated(30, 0.0, 1.0, 0.0);
-  glScaled(1.0, 6.0, 1.0);
-  glutSolidCube(1.0);
-  glPopMatrix();
+//   glPushMatrix();
+//   glTranslatef(-5.0, -3.5, -3.0);
+//   glRotated(30, 0.0, 1.0, 0.0);
+//   glScaled(1.0, 6.0, 1.0);
+//   glutWireCube(1.0);
+//   glPopMatrix();
 
-  glPushMatrix();
-  glTranslatef(-5.0, -3.5, +3.0);
-  glRotated(30, 0.0, 1.0, 0.0);
-  glScaled(1.0, 6.0, 1.0);
-  glutSolidCube(1.0);
-  glPopMatrix();
+//   glPushMatrix();
+//   glTranslatef(-5.0, -3.5, +3.0);
+//   glRotated(30, 0.0, 1.0, 0.0);
+//   glScaled(1.0, 6.0, 1.0);
+//   glutWireCube(1.0);
+//   glPopMatrix();
 
 } 
 
@@ -92,7 +92,7 @@ void display() {
     glTranslatef(0.0,0.0,1.0);
     glRotated(30, 1.0, 1.0, 0.0);
     glColor3f(0.0,1.0,0.0);    
-    mesa();
+    cadeira();
   glPopMatrix();
 	
 	glDisable(GL_LIGHTING);  
