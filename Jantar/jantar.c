@@ -52,33 +52,41 @@ void cadeira(){
 
   //Pernas
   glPushMatrix();
-  glTranslatef(0.0, -2.0, 0.0);
+  glTranslatef(1.0, -2.0, 1.0);
 //   glRotated(30, 0.0, 1.0, 0.0);
   glScaled(0.5, 4.0, 0.5);
   glutWireCube(1.0);
   glPopMatrix();
 
-//   glPushMatrix(); 
-//   glTranslatef(5.0, -3.5, +3.0);
+  glPushMatrix();
+  glTranslatef(-1.0, -2.0, 1.0);
 //   glRotated(30, 0.0, 1.0, 0.0);
-//   glScaled(1.0, 6.0, 1.0);
-//   glutWireCube(1.0);
-//   glPopMatrix();
+  glScaled(0.5, 4.0, 0.5);
+  glutWireCube(1.0);
+  glPopMatrix();
 
-//   glPushMatrix();
-//   glTranslatef(-5.0, -3.5, -3.0);
+  glPushMatrix();
+  glTranslatef(1.0, -2.0, -1.0);
 //   glRotated(30, 0.0, 1.0, 0.0);
-//   glScaled(1.0, 6.0, 1.0);
-//   glutWireCube(1.0);
-//   glPopMatrix();
+  glScaled(0.5, 4.0, 0.5);
+  glutWireCube(1.0);
+  glPopMatrix();
 
-//   glPushMatrix();
-//   glTranslatef(-5.0, -3.5, +3.0);
+  glPushMatrix();
+  glTranslatef(-1.0, -2.0, -1.0);
 //   glRotated(30, 0.0, 1.0, 0.0);
-//   glScaled(1.0, 6.0, 1.0);
-//   glutWireCube(1.0);
-//   glPopMatrix();
+  glScaled(0.5, 4.0, 0.5);
+  glutWireCube(1.0);
+  glPopMatrix();
 
+    //Tabua
+  glPushMatrix();
+  glTranslatef(0, 2.8, -2.3);
+  glRotated(90, 1.0, 0.0, 0.0);
+  glScaled(4.0, 0.5, 6.0);
+
+  glutWireCube(1.0);
+  glPopMatrix();
 } 
 
 void display() {
@@ -87,14 +95,42 @@ void display() {
   
   glMatrixMode(GL_MODELVIEW);
 	glEnable(GL_LIGHTING);
+
+    glRotated(30, 1.0, 1.0, 0.0);
   
   glPushMatrix();
     glTranslatef(0.0,0.0,1.0);
-    glRotated(30, 1.0, 1.0, 0.0);
+    glColor3f(0.0,1.0,0.0);    
+   mesa();
+  glPopMatrix();
+	
+   glPushMatrix();
+    glTranslatef(3.0,-2.5,1.0);
+   //  glRotated(30, 1.0, 1.0, 0.0);
     glColor3f(0.0,1.0,0.0);    
     cadeira();
   glPopMatrix();
-	
+  
+  glPushMatrix();
+    glTranslatef(-3.0,-2.5,1.0);
+   //  glRotated(30, 1.0, 1.0, 0.0);
+    glColor3f(0.0,1.0,0.0);    
+    cadeira();
+  glPopMatrix();
+
+glPushMatrix();
+    glTranslatef(-3.0,-2.5,5.0);
+    glRotated(180, 0.0, 1.0, 0.0);
+    glColor3f(0.0,1.0,0.0);    
+    cadeira();
+  glPopMatrix();
+
+   glTranslatef(3.0,-2.5,5.0);
+    glRotated(180, 0.0, 1.0, 0.0);
+    glColor3f(0.0,1.0,0.0);    
+    cadeira();
+  glPopMatrix();
+
 	glDisable(GL_LIGHTING);  
   glFlush();
 }
